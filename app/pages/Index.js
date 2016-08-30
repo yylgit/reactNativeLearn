@@ -36,13 +36,14 @@ export default class Index extends Component {
     }   
     _checkPermission () {
         PushNotificationIOS.checkPermissions((permissions)=>{
+            //permissions   {alert: 0, badge: 0, sound: 0}
             let nopermissions = {};
             Object.keys(permissions).forEach((key)=>{
                 if(permissions[key] == 0) {
                     nopermissions[key] = true;
                 }
             })
-            if(nopermissions === {}) {
+            if(nopermissions !== {}) {
                 PushNotificationIOS.requestPermissions(nopermissions);
             }
             

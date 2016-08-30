@@ -14,7 +14,6 @@ class TestKeyboard extends Component {
 		super(props);
 		
 	}
-	
 		// Keyboard actions
 	updateKeyboardSpace (frames) {
 	    console.log('show');
