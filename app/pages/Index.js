@@ -3,12 +3,13 @@ import {
     View,
     Navigator,
     PushNotificationIOS,
-    AlertIOS
+    AlertIOS,
+    StatusBar
 } from 'react-native';
 
 import Router from '../Router/Router';
 const INIT_ROUTE = {
-    name: 'Home'
+    name: 'PageList'
 }
 
 
@@ -64,6 +65,7 @@ export default class Index extends Component {
         );
     }
 
+
     _onLocalNotification(notification) {
         console.log('_onLocalNotification');
         console.log(notification);
@@ -78,6 +80,8 @@ export default class Index extends Component {
             }]
         );
     }
+
+
     _renderScene(route, navigator) {
         let props = {
             data: route.data,
@@ -85,13 +89,20 @@ export default class Index extends Component {
         }
         return Router(route.name, props);
     }
+
+
     render() {
         return ( 
-            < View style = {{ flex: 1 }} >
-                < Navigator initialRoute = { INIT_ROUTE }
+            <View style = {{ flex: 1 }} >
+            <StatusBar
+                hidden={false}
+                backgroundColor="blue"
+                barStyle="light-content"
+            />
+                <Navigator initialRoute = { INIT_ROUTE }
                     renderScene = { this._renderScene.bind(this) }
                 />  
-            < /View>
+            </View>
 
         );
     }

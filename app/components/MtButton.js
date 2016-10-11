@@ -16,9 +16,10 @@ export default class MtButton extends Component {
         onPress: PropTypes.func,
         containerStyle: View.propTypes.style,
         textStyle: Text.propTypes.style,
-        disabled: React.PropTypes.bool,
+        disabled: PropTypes.bool,
         disabledContainerStyle: View.propTypes.style,
         disabledTextStyle: Text.propTypes.style,
+        activityIndicatorColor: PropTypes.string,
         size: PropTypes.string, //xs、sm、lg 、default
         type: PropTypes.string  //default、primary、success、info 、warning、danger、link
     };
@@ -96,12 +97,12 @@ export default class MtButton extends Component {
         text = '';
         activeOpacity = 1;
   			content = (
-  				<View style={[styles.loading, {paddingTop: (customSize.containerStyle.height-20)/2}]}>
-	  				<ActivityIndicator
-	                	animating={true}
-	                	color="white"
-	                	size="small" />
-          </View>);
+  				<ActivityIndicator
+          animating={true}
+          size='small'
+          style={styles.spinner}
+          color={this.props.activityIndicatorColor || 'white'}
+          />);
   		}
 
       if(text) {
@@ -129,7 +130,6 @@ export default class MtButton extends Component {
         content = (childElements);
       }
      
-      console.log(this.props.children);
 	    return (
 	    	<TouchableOpacity {...this.props}  activeOpacity={activeOpacity}  style={finalContainerStyle}  onPress={this._onPress.bind(this)}>
   				{content}	    
@@ -269,12 +269,8 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(211, 211, 211, 1)',
     borderColor: 'rgba(211, 211, 211, 1)'
 	},
-	loading: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
+  spinner: {
+    alignSelf: 'center',
   }
 });
 

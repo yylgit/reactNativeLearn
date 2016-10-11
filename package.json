@@ -3,12 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "react-native start"
+    "start": "react-native start",
+    "clean:babelrc": "find ./node_modules -name react-packager -prune -o -name '.babelrc' -print | xargs rm -f",
+    "postinstall": "npm run clean:babelrc"
   },
   "dependencies": {
-    "react": "^15.2.1",
-    "react-native": "^0.31.0",
+    "@scfe/react-native-button": "git+ssh://git@git.sankuai.com/scfe/react-native-button.git",
+    "@scfe/react-native-datepicker": "^1.0.0",
+    "@scfe/react-native-push": "^1.0.2",
+    "react": "^15.3.0",
+    "react-native": "^0.33.0",
     "react-native-push-notification": "^2.0.2",
-    "react-native-vector-icons": "^2.0.3"
+    "react-native-vector-icons": "^2.1.0"
   }
 }

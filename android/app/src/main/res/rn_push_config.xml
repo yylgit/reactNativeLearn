@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<push>
+    <pushconfig>
+        <item name="push_password">retail.b</item> <!-- 必填项 第一步中申请得到的密码  -->
+        <item name="cat_app_id"></item> <!-- 可选项  接入cat监控后需要添加 -->
+        <item name="mi_push_app_id">2882303761517501216</item> <!-- 可选项 启用小米push通道时需要 -->
+        <item name="mi_push_app_key">5681750182216</item> <!-- 可选项 启用小米push通道时需要 -->
+        <item name="hw_push_app_id">10620286</item> <!-- 可选项 启用华为push通道时需要-->
+    </pushconfig>
+ 
+    <notification>
+        <item name="notification_title">美团零售</item>  <!-- 必填项-->
+        <item name="notification_url">retailb://meituan.com/rn</item>  <!-- 必须向 跳转协议与第五步中的第三小步 配置相同-->
+        <item name="notification_icon">ic_launcher</item>  <!-- 可选项 Notification 通知图标 这些资源必须放在mipmap-xxx 或者 drawable-xxx 这两种目录中 -->
+        <item name="notification_small_icon">ic_launcher</item> <!-- 可选项 Notification 通知小图标图标 这些资源必须放在mipmap-xxx 或者 drawable-xxx 这两种目录中-->
+        <item name="notification_white_icon">ic_launcher</item> <!-- 可选项 Notification 通知白色图标 这些资源必须放在mipmap-xxx 或者 drawable-xxx 这两种目录中-->
+        <item name="notification_icon_bg_color">theme</item> <!-- 可选项 Notification 白色背景色 该资源必须在res目录下values目录下的colors.xml中定义-->
+        <soundlist>
+            <item name="sound">ordersound2.mp3</item> <!-- 可选项 如过服务端要播放声音 请在push msg的json数据中extra中添加sound：ordersound2.mp3 这样的数据。ordersound2.mp3资源请放在res目录的raw下面-->
+            <item name="sound">refundsound2.mp3</item>
+            <item name="sound">remindersound2.mp3</item>
+        </soundlist>
+    </notification>
+</push>

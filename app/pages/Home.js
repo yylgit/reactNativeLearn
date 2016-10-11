@@ -8,6 +8,7 @@ export default class Home extends Component {
 			isLoading: false
 		}
 	}
+	
 	_goPush () {
 		this.props.navigator.push({name:'TestPush'});
 	}

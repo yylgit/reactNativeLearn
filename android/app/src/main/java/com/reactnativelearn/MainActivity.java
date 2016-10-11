@@ -12,4 +12,16 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "reactNativeLearn";
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        RnPushActivityDelegate.getIns().onCreate(getIntent());
+    }
+ 
+    @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        RnPushActivityDelegate.getIns().onNewIntent(getIntent());
+    }
 }

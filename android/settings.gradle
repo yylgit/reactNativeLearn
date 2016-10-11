@@ -1,3 +1,5 @@
 rootProject.name = 'reactNativeLearn'
 
 include ':app'
+include ':react-native-push'
+project(':react-native-push').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-push/android')
