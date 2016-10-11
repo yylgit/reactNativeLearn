@@ -4,7 +4,9 @@ import {
     Navigator,
     PushNotificationIOS,
     AlertIOS,
-    StatusBar
+    StatusBar,
+    StyleSheet,
+    Platform
 } from 'react-native';
 
 import Router from '../Router/Router';
@@ -14,72 +16,6 @@ const INIT_ROUTE = {
 
 
 export default class Index extends Component {
-
-    componentWillMount() {
-        this._checkPermission();
-        // Add listener for push notifications
-        PushNotificationIOS.addEventListener('notification', this._onNotification);
-        // Add listener for local notifications
-        PushNotificationIOS.addEventListener('localNotification', this._onLocalNotification);
-        PushNotificationIOS.addEventListener('register', this._onRegister);
-    }
-
-
-    componentWillUnmount() {
-        // Remove listener for push notifications
-        PushNotificationIOS.removeEventListener('notification', this._onNotification);
-        // Remove listener for local notifications
-        PushNotificationIOS.removeEventListener('localNotification', this._onLocalNotification);
-    }
-
-    _onRegister (token) {
-        console.log(token);
-    }   
-    _checkPermission () {
-        PushNotificationIOS.checkPermissions((permissions)=>{
-            //permissions   {alert: 0, badge: 0, sound: 0}
-            let nopermissions = {};
-            Object.keys(permissions).forEach((key)=>{
-                if(permissions[key] == 0) {
-                    nopermissions[key] = true;
-                }
-            })
-            if(nopermissions !== {}) {
-                PushNotificationIOS.requestPermissions(nopermissions);
-            }
-            
-        });
-    }
-    _onNotification(notification) {
-        console.log('_onNotification');
-        console.log(notification);
-        console.log(notification.getData());
-        var data = notification.getData();
-        AlertIOS.alert(
-            'Push Notification Received',
-            'Alert message: ' + data.title, 
-            [{
-                text: 'Dismiss',
-                onPress: null,
-            }]
-        );
-    }
-
-
-    _onLocalNotification(notification) {
-        console.log('_onLocalNotification');
-        console.log(notification);
-        console.log(notification.getData());
-        var data = notification.getData();
-        AlertIOS.alert(
-            'Local Notification Received',
-            'Alert message: ' + data.title, 
-            [{
-                text: 'Dismiss',
-                onPress: null,
-            }]
-        );
-    }
 
 
     _renderScene(route, navigator) {
@@ -91,15 +27,19 @@ export default class Index extends Component {
     }
 
 
+    _configureScene(route) {
+        if (Platform.OS === 'android' && route.name === 'BarcodeScannerPage') {
+            return Navigator.SceneConfigs.HorizontalSwipeJump;
+        }
+        return Navigator.SceneConfigs.FloatFromRight;
+    }
+
+
     render() {
         return ( 
             <View style = {{ flex: 1 }} >
-            <StatusBar
-                hidden={false}
-                backgroundColor="blue"
-                barStyle="light-content"
-            />
                 <Navigator initialRoute = { INIT_ROUTE }
+                    configureScene={this._configureScene.bind(this)}
                     renderScene = { this._renderScene.bind(this) }
                 />  
             </View>
@@ -107,3 +47,43 @@ export default class Index extends Component {
         );
     }
 }
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff'
+    },
+    navBar: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: '#2e3944'
+    },
+    navBarIOS: {
+        height: 60,
+        paddingTop: 20,
+    },
+    navBarAndroid: {
+        height: 50
+    },
+    left: {
+        width: 50,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    leftText: {
+        color: 'white',
+        fontSize: 16,
+        marginLeft: 5
+    },
+    title: {
+        color: 'white',
+        fontSize: 18
+    },
+    right: {
+        width: 50
+    }
+});

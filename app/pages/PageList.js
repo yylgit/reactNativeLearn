@@ -43,9 +43,7 @@ class PageList extends Component {
 
 	_renderRow(page) {
 		return (
-			<TouchableOpacity style={styles.row} onPress={this._rowPress.bind(this, page)}>
-				<Text style={styles.rowText}>{page.name}</Text>
-			</TouchableOpacity>
+			<MtButton text={page.name} onPress={this._rowPress.bind(this,page)}  />
 		);
 	}
 

@@ -11,6 +11,7 @@ import {
 }   from 'react-native';
 // import DatePicker from '@scfe/react-native-datepicker';
 import DatePicker from '../components/RNDatePicker';
+import NavigatorBar from '../components/NavigatorBar';
 
 class TestDatePicker extends Component {
     constructor(props) {
@@ -74,17 +75,18 @@ class TestDatePicker extends Component {
         let dateStr = this._stringifyDate(this.state.date);
     	  return (
       		  <View style={styles.container}>
+      		  	<NavigatorBar back={true} {...this.props}  />
                 <View style={{flexDirection: 'row',alignItems: 'center'}}> 
-                  <Text style={{width: 80}}>
-                    选择日期：
-                  </Text>
-                  <TouchableOpacity 
-                    style={styles.datewrap}
-                    onPress={this._changeDateShow.bind(this)}>
-                    <Text style={styles.dateText}>
-                      {dateStr}
-                    </Text>
-                  </TouchableOpacity>
+                  	<Text style={{width: 80}}>
+                    	选择日期：
+                  	</Text>
+	                  <TouchableOpacity 
+	                    	style={styles.datewrap}
+	                    	onPress={this._changeDateShow.bind(this)}>
+	                    	<Text style={styles.dateText}>
+	                      	{dateStr}
+	                    	</Text>
+	                  </TouchableOpacity>
                 </View>
                 {this._renderDate()}
                 <View style={{flexDirection: 'row',alignItems: 'center'}}>
@@ -99,8 +101,6 @@ class TestDatePicker extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
-        paddingTop: 40,
         flex: 1
     },
     datewrap: {

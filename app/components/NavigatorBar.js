@@ -7,13 +7,19 @@ import {
   	View,
   	Platform,
   	TouchableOpacity,
-  	Text
+  	Text,
+  	StatusBar
 } from 'react-native';
 
 class NavigatorBar extends Component {
+	static  propTypes = {
+	  	back: React.PropTypes.bool,
+	  	leftPress: React.PropTypes.func,
+
+	}
 
 	_leftBtn() {
-		let {leftPress,navigator} = this.props;
+		let {leftPress, navigator} = this.props;
 		if(leftPress && leftPress instanceof Function) {
 			leftPress();
 		} else {
@@ -42,6 +48,9 @@ class NavigatorBar extends Component {
         }
         return (
             <View style={[styles.navBar, navBarStyle]}>
+            	<StatusBar
+                    hidden={false}
+                    barStyle="light-content"/>
             	{this._renderLeftBtn()}
             	<Text style={styles.navBarText}>{name}</Text>
             </View>
@@ -56,7 +65,7 @@ const styles = StyleSheet.create({
     },
     navBar: {
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         paddingLeft: 10,
         paddingRight: 10,
