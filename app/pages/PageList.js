@@ -9,9 +9,11 @@ import {
   	ListView,
   	TouchableOpacity,
   	Text,
-  	StatusBar
+  	StatusBar,
+  	Platform
 } from 'react-native';
-
+import NavigatorBar from '../components/NavigatorBar';
+import MtButton from '../components/MtButton';
 class PageList extends Component {
 	constructor(props) {
 	  	super(props);
@@ -48,15 +50,25 @@ class PageList extends Component {
 	}
 
 
+	_renderNavBar() {
+        let navBarStyle = styles.navBarIOS;
+        if (Platform.OS === 'android') {
+            navBarStyle = styles.navBarAndroid;
+        }
+        return (
+            <View style={[styles.navBar, navBarStyle]}>
+            	<Text style={styles.navBarText}>pageList</Text>
+            </View>
+        );
+    }
+
   	render() {
     	return (
-    		
       		<View style={styles.container}>
       			<StatusBar
-	                hidden={false}
-	                backgroundColor="blue"
-	                barStyle="light-content"
-	            />
+                    hidden={false}
+                    barStyle="light-content"/>
+	            <NavigatorBar name="pageList" />
       			<ListView
 			        dataSource={this.state.dataSource}
 			        renderRow={this._renderRow.bind(this)}
@@ -67,13 +79,33 @@ class PageList extends Component {
 }
 
 const styles = StyleSheet.create({
-	row: {
-		height: 40,
-		alignItems: 'center'
-	},
-	container: {
-		flex: 1
-	}
+    container: {
+        flex: 1,
+        backgroundColor: '#fff'
+    },
+    navBar: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: '#2e3944'
+    },
+    navBarIOS: {
+        height: 60,
+        paddingTop: 20,
+    },
+    navBarAndroid: {
+        height: 50
+    },
+    navBarText: {
+    	textAlign: 'center', 
+    	color: '#fff'
+    },
+    row: {
+    	height: 40,
+    	alignItems: 'center',
+    }
 });
 
 
