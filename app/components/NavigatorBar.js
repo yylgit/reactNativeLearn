@@ -32,11 +32,14 @@ class NavigatorBar extends Component {
 		if(back) {
 			return (
 				<TouchableOpacity style={styles.leftBtn} onPress={this._leftBtn.bind(this)}>
-            		<Text>{'<'}</Text>
+            		<Text style={styles.leftArrow}>{'<'}</Text>
             	</TouchableOpacity>
 			)
 		} else {
-			return null;
+			return (
+				<View style={styles.leftBtn}>
+				</View>
+			);
 		}
 	}
 
@@ -53,6 +56,8 @@ class NavigatorBar extends Component {
                     barStyle="light-content"/>
             	{this._renderLeftBtn()}
             	<Text style={styles.navBarText}>{name}</Text>
+            	<View style={styles.rightBtn}>
+            	</View>
             </View>
         );
   	}
@@ -65,7 +70,6 @@ const styles = StyleSheet.create({
     },
     navBar: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
         paddingLeft: 10,
         paddingRight: 10,
@@ -80,14 +84,23 @@ const styles = StyleSheet.create({
     },
     navBarText: {
     	textAlign: 'center', 
-    	color: '#fff'
+    	color: '#fff',
+    	flex: 1
     },
     row: {
     	height: 40,
     	alignItems: 'center'
     },
     leftBtn: {
-
+    	width: 40
+    },
+    rightBtn: {
+    	width: 40
+    },
+    leftArrow: {
+    	color: '#fff',
+    	fontWeight: 'bold',
+    	fontSize: 20
     }
 });
 

@@ -63,9 +63,7 @@ class PageList extends Component {
   	render() {
     	return (
       		<View style={styles.container}>
-      			<StatusBar
-                    hidden={false}
-                    barStyle="light-content"/>
+      			
 	            <NavigatorBar name="pageList" />
       			<ListView
 			        dataSource={this.state.dataSource}
